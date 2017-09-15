@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/smart_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:srlDisableContentWhenRefresh="true"
+    app:srlEnableHeaderTranslationContent="false"
+    app:srlEnableLoadmore="true">
+
+
+    <com.scwang.smartrefresh.header.FunGameBattleCityHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:onClick="stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下拉刷新" />
+
+
+    <com.scwang.smartrefresh.layout.footer.ballpulse.BallPulseView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

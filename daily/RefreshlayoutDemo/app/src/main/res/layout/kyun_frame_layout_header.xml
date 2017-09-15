@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="11dp"
+        android:paddingTop="11dp">
+
+        <TextView
+            android:id="@+id/tv_head_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="下拉刷新"
+            android:textColor="#959595"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/iv_windmill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kyun_ptr_header_animal_list"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/tv_head_title"
+            android:contentDescription="@string/app_name" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
