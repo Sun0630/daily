@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sx.sweepdeletedemo.view.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="100dp"
+                                             android:clickable="true"
+                                             android:paddingBottom="1dp"
+                                             app:ios="true"
+                                             app:leftSwipe="true"
+                                             app:swipeEnable="true"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ccc"
+        android:gravity="center"
+        android:text="嘿嘿嘿"/>
+
+    <!--删除按钮-->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="@color/red_ff4a57"
+        android:text="删除"
+        android:textColor="@color/white"/>
+
+</com.sx.sweepdeletedemo.view.SwipeMenuLayout>
