@@ -51,8 +51,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RViewHolder> {
 
         public RViewHolder(View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.tv_text);
-            mDelBtn = itemView.findViewById(R.id.btnDelete);
+            mTextView = (TextView) itemView.findViewById(R.id.tv_text);
+            mDelBtn = (Button) itemView.findViewById(R.id.btnDelete);
         }
 
         public void setData(int position) {
