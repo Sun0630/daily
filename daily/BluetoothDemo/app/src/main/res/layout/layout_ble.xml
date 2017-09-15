@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_ble_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="蓝牙名称"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_ble_mac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAC地址"/>
+
+    <TextView
+        android:id="@+id/tv_ble_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="连接状态"/>
+
+</LinearLayout>
