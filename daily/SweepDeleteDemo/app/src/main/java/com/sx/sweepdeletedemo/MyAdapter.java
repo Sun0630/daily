@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * @Author Administrator
+ * @Author Sunxin
  * @Date 2017/9/15 0015 下午 4:38
  * @Description
  */
