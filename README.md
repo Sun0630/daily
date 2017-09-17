@@ -1,13 +1,13 @@
 ## Daily work
 
-#### 2017-09-13
+#### [2017-09-13](https://github.com/Sun0630/daily/blob/master/note/0913.md)
 * WebView的简单使用
 * FlycoTablayout的使用
 
-#### 2017-09-14
+#### [2017-09-14](https://github.com/Sun0630/daily/blob/master/note/0914.md)
 * 使用Permission4M动态申请权限，适配小米手机
 * 两种下拉刷新库的比较
 
-#### 2017-09-15
+#### [2017-09-15](https://github.com/Sun0630/daily/blob/master/note/0915.md)
 * BLE蓝牙的简单实现扫描和连接功能
 * RecyclerView侧滑删除的实现
