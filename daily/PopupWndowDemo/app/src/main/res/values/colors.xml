@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="search_doctor_edt_circle_color">#d6d6d6</color>
+    <color name="default_white">#ffffff</color>
+    <color name="ky_color_doctor_order_name">#4f4f4f</color>
+</resources>

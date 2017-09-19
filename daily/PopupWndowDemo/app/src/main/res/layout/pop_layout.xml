@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/layout_popup_select_region_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/default_white"
+        android:baselineAligned="false"
+        android:paddingBottom="15dp">
+
+        <ListView
+            android:id="@+id/pop_listview_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:divider="#e1e1e2"
+            android:dividerHeight="1dp"
+            android:scrollbars="none"
+            />
+    </LinearLayout>
+</RelativeLayout>

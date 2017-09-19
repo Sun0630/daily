@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         //设置自适应屏幕大小
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
-
         //设置进度条监听
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
