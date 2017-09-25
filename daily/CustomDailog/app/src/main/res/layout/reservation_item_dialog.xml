@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_reservation_container"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/cb_reservatin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/iv_check_item"
+        android:checked="false"
+        android:paddingLeft="@dimen/ky_dimen_dp_16"
+        android:text="中医特色疗法"
+        android:textColor="@color/text_color_555555"
+        android:textSize="@dimen/default_text_size_19"/>
+
+    <CheckBox
+        android:id="@+id/cb_reservatin1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/iv_check_item"
+        android:checked="false"
+        android:paddingLeft="@dimen/ky_dimen_dp_16"
+        android:text="中医特色"
+        android:textColor="@color/text_color_555555"
+        android:textSize="@dimen/default_text_size_19"/>
+
+    <CheckBox
+        android:id="@+id/cb_reservatin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/iv_check_item"
+        android:checked="false"
+        android:paddingLeft="@dimen/ky_dimen_dp_16"
+        android:text="中医疗法"
+        android:textColor="@color/text_color_555555"
+        android:textSize="@dimen/default_text_size_19"/>
+</LinearLayout>

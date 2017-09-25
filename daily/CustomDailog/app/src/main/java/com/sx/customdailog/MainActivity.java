@@ -4,22 +4,27 @@ import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.style.AbsoluteSizeSpan;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sx.customdailog.dialog.AlertDialog;
-import com.zhy.view.flowlayout.FlowLayout;
-import com.zhy.view.flowlayout.TagAdapter;
-import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
+        
 
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -114,39 +121,145 @@ public class MainActivity extends AppCompatActivity {
         //背景变暗
         dimBackground(1.0f, 0.5f);
         final AlertDialog timeDialog = new AlertDialog.Builder(this)
-                .setContentView(R.layout.time_dialog)
+                .setContentView(R.layout.remark_dialog2)
+                .setDefaultAnimation()
                 .show();
 
-        TagFlowLayout flowLayout = timeDialog.getView(R.id.flow_layout);
-        System.out.println("TagFlowLayout-->" + flowLayout);
-        flowLayout.setAdapter(new TagAdapter(datas) {
-            @Override
-            public View getView(FlowLayout parent, int position, Object o) {
-                return null;
-            }
+        RecyclerView recyclerView = timeDialog.getView(R.id.recycler);
 
-            @Override
-            public void onSelected(int position, View view) {
-                super.onSelected(position, view);
-                view.setBackgroundResource(R.mipmap.home_home_reservation_pic_03);
-            }
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
+        MyAdapter adapter = new MyAdapter();
+        recyclerView.setAdapter(adapter);
 
-            @Override
-            public void unSelected(int position, View view) {
-                super.unSelected(position, view);
-                view.setBackgroundResource(R.mipmap.home_home_reservation_pic_01);
-            }
 
-        });
         timeDialog.setOnClickListener(R.id.btn_sure, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "内容是：", Toast.LENGTH_SHORT).show();
+
                 timeDialog.dismiss();
             }
         });
 
+        timeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface anInterface) {
+                dimBackground(0.5f, 1.0f);//背景变量
+            }
+        });
 
+    }
+
+    public void dialog3(View view) {
+        //背景变暗
+        dimBackground(1.0f, 0.5f);
+        final AlertDialog projectDialog = new AlertDialog.Builder(this)
+                .setContentView(R.layout.dialog_doctor)
+                .setDefaultAnimation()
+                .show();
+
+
+
+        projectDialog.setOnClickListener(R.id.btn_sure, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                projectDialog.dismiss();
+            }
+        });
+
+        projectDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface anInterface) {
+                dimBackground(0.5f, 1.0f);//背景变量
+            }
+        });
+
+    }
+
+
+    public void dialog4(View view) {
+        //背景变暗
+        dimBackground(1.0f, 0.5f);
+        final AlertDialog reservationDialog = new AlertDialog.Builder(this)
+                .setContentView(R.layout.reservation_itme_dialog1)
+                .setDefaultAnimation()
+                .show();
+
+        reservationDialog.setOnClickListener(R.id.btn_sure, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                reservationDialog.dismiss();
+            }
+        });
+
+        reservationDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface anInterface) {
+                dimBackground(0.5f, 1.0f);//背景变量
+            }
+        });
+
+    }
+
+    public void dialog5(View view) {
+        //背景变暗
+        dimBackground(1.0f, 0.5f);
+        final AlertDialog reservationDialog = new AlertDialog.Builder(this)
+                .setContentView(R.layout.reservation_cancle)
+                .setDefaultAnimation()
+                .show();
+        Collections.copy();
+//        reservationDialog.setOnClickListener(R.id.btn_sure, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                reservationDialog.dismiss();
+//            }
+//        });
+//
+//        reservationDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface anInterface) {
+//                dimBackground(0.5f, 1.0f);//背景变量
+//            }
+//        });
+    }
+
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.doctor_item, parent, false);
+
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.setData(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return datas.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+
+            private TextView textView;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                textView = itemView.findViewById(R.id.tv_time);
+            }
+
+            public void setData(int position) {
+                String text = datas.get(position);
+                textView.setText(text);
+            }
+        }
     }
 
 

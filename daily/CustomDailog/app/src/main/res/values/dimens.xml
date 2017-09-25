@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ky_dimen_dp_20">20dp</dimen>
+    <dimen name="ky_dimen_dp_22">22dp</dimen>
+    <dimen name="ky_dimen_dp_16">16dp</dimen>
+    <dimen name="default_text_size_19">19dp</dimen>
+    <dimen name="chq_item_num_radio_btn_margin_top">10dp</dimen>
+</resources>

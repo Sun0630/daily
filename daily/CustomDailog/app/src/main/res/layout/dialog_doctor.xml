@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/remark_border"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:text="预约专家"
+            android:textColor="#2BD78B"
+            android:textSize="18sp"/>
+
+
+        <RadioGroup
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="20dp"
+            android:id="@+id/rg_project"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+
+            <RadioButton
+                android:id="@+id/rb_project_item1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/iv_check_item"
+                android:text="赵医生"
+                android:textColor="@color/text_color_555555"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/rb_project_item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/iv_check_item"
+                android:text="王医生"
+                android:textColor="@color/text_color_555555"
+                android:textSize="16sp"/>
+
+
+        </RadioGroup>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/rg_project"
+            android:layout_marginTop="10dp"
+            android:background="#d9d9d9"/>
+
+
+        <Button
+            android:id="@+id/btn_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:text="完成"
+            android:textColor="#2BD78B"
+            android:textSize="20sp"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

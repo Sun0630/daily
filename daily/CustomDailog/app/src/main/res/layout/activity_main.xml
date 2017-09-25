@@ -9,6 +9,7 @@
     tools:context="com.sx.customdailog.MainActivity">
 
     <Button
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="dialog"
@@ -17,10 +18,36 @@
 
 
     <Button
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="dialog2"
         android:text="dialog2"
+        />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="dialog3"
+        android:text="dialog3"
+        />
+
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="dialog4"
+        android:text="dialog4"
+        />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="dialog5"
+        android:text="dialog5"
         />
 
 
