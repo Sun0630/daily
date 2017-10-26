@@ -11,3 +11,6 @@
 #### [2017-09-15](https://github.com/Sun0630/daily/blob/master/note/0915.md)
 * BLE蓝牙的简单实现扫描和连接功能
 * RecyclerView侧滑删除的实现
+
+#### 2017-09-26
+* 状态栏文字颜色适配手机

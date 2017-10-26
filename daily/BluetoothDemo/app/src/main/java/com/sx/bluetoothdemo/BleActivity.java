@@ -1,6 +1,8 @@
 package com.sx.bluetoothdemo;
 
 import android.Manifest;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGattCharacteristic;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +17,6 @@ import com.joker.annotation.PermissionsGranted;
 import com.joker.api.Permissions4M;
 
 import net.idik.lib.slimadapter.SlimAdapter;
-import net.idik.lib.slimadapter.SlimInjector;
-import net.idik.lib.slimadapter.viewinjector.IViewInjector;
 
 import java.util.ArrayList;
 
@@ -78,6 +78,13 @@ public class BleActivity extends AppCompatActivity {
         }
 
         @Override
+        public void onChanged(BluetoothGattCharacteristic characteristic) {
+            super.onChanged(characteristic);
+            //蓝牙的数据已经改变
+
+        }
+
+        @Override
         public void onConnectionChanged(final BleDevice device) {
             //连接状态发生改变回调
             Log.e(TAG, "onConnectionChanged: 状态改变了" + device.getConnectionState() + "---> " + device.isConnected());
@@ -102,6 +109,16 @@ public class BleActivity extends AppCompatActivity {
                     }
                 }
             });
+
+//            mAdapter.getDevice()
+
+
+        }
+
+        @Override
+        public void onReady(BluetoothDevice device) {
+            super.onReady(device);
+            Log.e(TAG, "onReady: ");
         }
     };
 
@@ -155,28 +172,6 @@ public class BleActivity extends AppCompatActivity {
         });
     }
 
-    private void initData() {
-        mSlimAdapter = SlimAdapter.create()
-                .register(R.layout.layout_ble, new SlimInjector<BleDevice>() {
-                    @Override
-                    public void onInject(BleDevice data, IViewInjector injector) {
-
-                        Log.e(TAG, "onInject: " + data.getmBleName() + "--> " + data.getBleAddress() + "--> " + data.getConnectionState() + "--> " + data.getBleAlias());
-                        injector.text(R.id.tv_ble_name, data.getmBleName())
-                                .text(R.id.tv_ble_mac, data.getBleAddress());
-
-                        if (data.isConnected()) {
-                            injector.text(R.id.tv_ble_link, "已连接");
-                        } else if (data.isConnectting()) {
-                            injector.text(R.id.tv_ble_link, "正在连接中...");
-                        } else {
-                            injector.text(R.id.tv_ble_link, "未连接");
-                        }
-                    }
-                }).attachTo(mRecyclerView);
-
-        mSlimAdapter.updateData(mDevices);
-    }
 
 
     private void setConnectedNum() {
