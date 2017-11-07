@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandableTextView">
+        <!--内容文字大小-->
+        <attr name="contentTextSize" format="dimension"/>
+        <!--内容文字颜色-->
+        <attr name="contentTextColor" format="color"/>
+        <!--最大可折叠行数-->
+        <attr name="maxCollapseLines" format="integer"/>
+        <!--内容行间距乘数-->
+        <attr name="contentLineSpacingMultiplier" format="float"/>
+        <!--展开的图片-->
+        <attr name="expandDrawable" format="reference"/>
+        <!--展开的文字-->
+        <attr name="expandText" format="string"/>
+        <!--折叠的图片-->
+        <attr name="collapseDrawable" format="reference"/>
+        <!--折叠的文字-->
+        <attr name="collapseText" format="string"/>
+        <!--展开折叠的文字颜色-->
+        <attr name="ExpandCollapseTextColor" format="color"/>
+        <!--动画时长-->
+        <attr name="animationDuration" format="integer"/>
+        <!--位置-->
+        <attr name="DrawableAndTextGravity">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>
