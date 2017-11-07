@@ -16,6 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:DrawableAndTextGravity="center"
+        app:animationDuration="500"
+        app:collapseText="less"
+        app:expandText="more"
         app:maxCollapseLines="4"/>
 
 
