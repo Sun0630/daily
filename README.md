@@ -12,12 +12,9 @@
 * BLE蓝牙的简单实现扫描和连接功能
 * RecyclerView侧滑删除的实现
 
----
-* 自定义Dialog 的封装
-
----
 
 * 状态栏文字颜色适配手机
 * RecyclerView实现下拉刷新和上拉加载更多
 * 实现一个可伸缩的TextView
-![](\daily\ExpandableTextViewDemo\gif\textview.gif)
+
+![](https://github.com/Sun0630/daily/blob/master/daily/ExpandableTextViewDemo/gif/textview.gif?raw=true)
