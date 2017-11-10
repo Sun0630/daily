@@ -2,5 +2,6 @@
  * 函数
  */
 fun main(args: Array<String>): Unit {
-    println("Hello World")
+    val ipAddress = "192.168.32.254"
+    println(ipAddress.replace(".",""))
 }
