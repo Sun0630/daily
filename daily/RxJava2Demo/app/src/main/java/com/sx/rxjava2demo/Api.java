@@ -2,6 +2,7 @@ package com.sx.rxjava2demo;
 
 import com.sx.rxjava2demo.entity.LoginRequest;
 import com.sx.rxjava2demo.entity.LoginResponse;
+import com.sx.rxjava2demo.entity.RegisterEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -30,8 +31,8 @@ public interface Api {
      * @param response
      * @return
      */
-//    @GET
-//    Observable<RegisterEntity> register(@Body RegisterEntity response);
+    @GET
+    Observable<RegisterEntity> register(@Body RegisterEntity response);
 
 
 }

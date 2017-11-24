@@ -1,6 +1,7 @@
 package com.sx.rxjava2demo;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,10 +10,17 @@ import android.widget.Toast;
 import com.sx.rxjava2demo.entity.LoginRequest;
 import com.sx.rxjava2demo.entity.LoginResponse;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -20,6 +28,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -41,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
         //-map 操作符
 //        test3();
         //-flatmap 操作符
-        test4();
+//        test4();
+        //-zip 操作符
+//        test5();
+        //-Flowable
+        test6();
     }
 
 
@@ -212,4 +225,141 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    private void test5() {
+        /**
+         * 创建两根水管
+         */
+        Observable<Integer> observable1 = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                Log.e(TAG, "Emitter:1 ");
+                e.onNext(1);
+                SystemClock.sleep(1000);
+
+
+                Log.e(TAG, "Emitter:2 ");
+                e.onNext(2);
+                SystemClock.sleep(1000);
+
+                Log.e(TAG, "Emitter:3 ");
+                e.onNext(3);
+                SystemClock.sleep(1000);
+
+                Log.e(TAG, "Emitter:4 ");
+                e.onNext(4);
+                SystemClock.sleep(1000);
+
+                Log.e(TAG, "Emitter:complete1 ");
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.io());
+
+        Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                Log.e(TAG, "Emitter:A ");
+                e.onNext("A");
+                SystemClock.sleep(1000);
+
+                Log.e(TAG, "Emitter:B ");
+                e.onNext("B");
+                SystemClock.sleep(1000);
+
+                Log.e(TAG, "Emitter:C ");
+                e.onNext("C");
+                SystemClock.sleep(1000);
+
+                Log.e(TAG, "Emitter:conmlete2 ");
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.io());
+
+        /**
+         * 组合两根水管
+         */
+        Observable.zip(observable1, observable2, new BiFunction<Integer, String, String>() {
+            @Override
+            public String apply(Integer integer, String s) throws Exception {
+                return integer + s;
+            }
+        }).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.e(TAG, "onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.e(TAG, "onNext: " + s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: ");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "onComplete: ");
+            }
+        });
+
+    }
+
+    private void test6() {
+        Flowable<Integer> upStream = Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> e) throws Exception {
+                Log.e(TAG, "Emitter:1 ");
+                e.onNext(1);
+
+                Log.e(TAG, "Emitter:2 ");
+                e.onNext(2);
+
+                Log.e(TAG, "Emitter:3 ");
+                e.onNext(3);
+
+                Log.e(TAG, "Emitter:complete1 ");
+                e.onComplete();
+            }
+            /*增加一个背压策略参数。*/
+        }, BackpressureStrategy.ERROR);
+
+
+        Subscriber<Integer> downStream = new Subscriber<Integer>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+                Log.e(TAG, "onSubscribe: " );
+                //响应式拉取。request是一种能力，下游处理事件的能力。
+                s.request(Long.MAX_VALUE);
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.e(TAG, "onNext: "+integer );
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.e(TAG, "onError: ");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "onComplete: ");
+            }
+        };
+
+
+        upStream.subscribe(downStream);
+
+    }
+
+
+
+
+
+
 }
