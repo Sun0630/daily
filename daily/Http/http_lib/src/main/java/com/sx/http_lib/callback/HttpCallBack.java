@@ -1,6 +1,7 @@
 package com.sx.http_lib.callback;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.sx.http_lib.base.HttpUtils;
@@ -17,8 +18,11 @@ import java.util.Map;
 public abstract class HttpCallBack<T> implements IEngineCallback {
 
 
+    private static final String TAG = HttpCallBack.class.getSimpleName();
+
     @Override
     public void onSuccess(String result) {
+        Log.e(TAG, "onSuccess: "+result );
         T objresult = (T) new Gson().fromJson(result, HttpUtils.analysisClassInfo(this));
         success(objresult);
     }

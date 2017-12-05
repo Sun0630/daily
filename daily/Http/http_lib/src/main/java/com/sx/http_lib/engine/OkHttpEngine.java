@@ -1,6 +1,8 @@
 package com.sx.http_lib.engine;
 
 import android.content.Context;
+import android.os.Handler;
+import android.util.Log;
 
 import com.sx.http_lib.base.IEngineCallback;
 import com.sx.http_lib.base.IHttpEngine;
@@ -23,7 +25,9 @@ import okhttp3.Response;
 
 public class OkHttpEngine implements IHttpEngine {
 
+    private static final String TAG = OkHttpEngine.class.getSimpleName();
     public static OkHttpClient okHttpClient = new OkHttpClient();
+    private Handler handler = new Handler();
 
     @Override
     public void get(Context context, String url, Map<String, Object> params, final IEngineCallback callback) {
@@ -43,8 +47,16 @@ public class OkHttpEngine implements IHttpEngine {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        String resultJson = response.body().toString();
-                        callback.onSuccess(resultJson);
+
+                        final String resultJson = response.body().toString();
+                        Log.e(TAG, "onResponse: " + resultJson);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onSuccess(resultJson);
+
+                            }
+                        });
                     }
                 });
 
@@ -64,13 +76,20 @@ public class OkHttpEngine implements IHttpEngine {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
+
                         callBack.onError(e);
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        String resultJson = response.body().toString();
-                        callBack.onSuccess(resultJson);
+                        final String resultJson = response.body().toString();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                callBack.onSuccess(resultJson);
+                            }
+                        });
                     }
                 });
     }
