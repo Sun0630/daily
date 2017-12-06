@@ -1,6 +1,7 @@
 package kotlins
 
-import javafx.scene.control.Separator
+import strings.Button
+import strings.View
 
 
 //创建set集合
@@ -10,26 +11,24 @@ val list = arrayListOf<Int>(1, 5, 6)
 //创建map
 val map = hashMapOf<Int, String>(1 to "one", 5 to "five", 6 to "six")
 
-@JvmOverloads
-fun <T> joinToString(
-        collection: Collection<T>,
-        separator: String=",",
-        prefix: String="",
-        postfix: String=""
-): String {
-    val result = StringBuilder(prefix)
-
-    for ((index, element) in collection.withIndex()) {
-        if (index > 0) {
-            result.append(separator)
-        }
-        result.append(element)
-    }
-    result.append(postfix)
-    return result.toString()
-}
-
-
+//@JvmOverloads
+//fun <T> joinToString(
+//        collection: Collection<T>,
+//        separator: String=",",
+//        prefix: String="",
+//        postfix: String=""
+//): String {
+//    val result = StringBuilder(prefix)
+//
+//    for ((index, element) in collection.withIndex()) {
+//        if (index > 0) {
+//            result.append(separator)
+//        }
+//        result.append(element)
+//    }
+//    result.append(postfix)
+//    return result.toString()
+//}
 
 
 /**
@@ -44,7 +43,21 @@ fun main(args: Array<String>): Unit {
 //    class java.util.HashMap
 
     val list = listOf<Int>(1, 2, 3)
-    println(joinToString(list, "--"))
+//    println(joinToString(list, "--"))
     //命名参数
-    println(joinToString(collection = list,separator = "+",prefix = "[",postfix = "]"))
+//    println(joinToString(collection = list, separator = "+", prefix = "[", postfix = "]"))
+    println("Sunxin".lastChar())
+    println(list.joinToString(" "))
+    println(list.joinToString(collection = list, prefix = "<", postfix = ">"))
+
+    val view: View = Button()
+    view.click()
+    view.showOff()
+
+    println("Lottie".lastChar)//e
+
+    val sb = StringBuilder("Kotlin?")
+    sb.lastChar = '!'
+    println(sb)//Kotlin!
+
 }

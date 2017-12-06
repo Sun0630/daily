@@ -13,7 +13,7 @@ import com.sx.http_lib.callback.HttpCallBack;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    String url = "https://api.douban.com/v2/book/1220562";
+    String url = "http://gank.io/api/data/Android/10/1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
