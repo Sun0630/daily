@@ -19,3 +19,6 @@
 * [实现一个可伸缩的TextView](https://github.com/Sun0630/daily/blob/master/daily/ExpandableTextViewDemo/README.md)
 
 ![](https://github.com/Sun0630/daily/blob/master/daily/ExpandableTextViewDemo/gif/textview.gif?raw=true)
+
+* 智能搜索框
+![](/daily/SearchLayout/search.jpg)

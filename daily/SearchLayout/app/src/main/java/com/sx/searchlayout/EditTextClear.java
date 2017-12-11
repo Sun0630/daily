@@ -21,11 +21,14 @@ public class EditTextClear extends android.support.v7.widget.AppCompatEditText {
     private Drawable clearDrawable, searchDrawable;
 
     public EditTextClear(Context context) {
-        this(context, null);
+        super(context);
+        init();
+        // 初始化该组件时，对EditText_Clear进行初始化 ->>步骤2
     }
 
     public EditTextClear(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init();
     }
 
     public EditTextClear(Context context, AttributeSet attrs, int defStyleAttr) {

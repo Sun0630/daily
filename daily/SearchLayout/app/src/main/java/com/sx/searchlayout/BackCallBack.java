@@ -6,6 +6,6 @@ package com.sx.searchlayout;
  * @Description 后退按键返回回调
  */
 
-public interface BackCallBak {
+public interface BackCallBack {
     void backAction();
 }
