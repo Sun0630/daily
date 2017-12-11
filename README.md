@@ -21,4 +21,4 @@
 ![](https://github.com/Sun0630/daily/blob/master/daily/ExpandableTextViewDemo/gif/textview.gif?raw=true)
 
 * 智能搜索框
-![](/daily/SearchLayout/search.jpg)
+![](/daily/SearchLayout/search.png)
