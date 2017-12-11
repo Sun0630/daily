@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Search_View">
+        <!--文字大小-->
+        <attr name="textSizeSearch" format="dimension"/>
+        <!--文字颜色-->
+        <attr name="textColorSearch" format="color"/>
+        <!--hint文字-->
+        <attr name="textHintSearch" format="string"/>
+        <!--搜索框高度-->
+        <attr name="searchBlockHeight" format="integer"/>
+        <!--搜索框颜色-->
+        <attr name="searchBlockColor" format="color"/>
+    </declare-styleable>
+</resources>
