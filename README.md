@@ -22,3 +22,5 @@
 
 * 智能搜索框
 ![](/daily/SearchLayout/search.png)
+
+* 提示音加震动(SoundPool & Vibrator)
