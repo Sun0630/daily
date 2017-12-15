@@ -20,7 +20,12 @@
 
 ![](https://github.com/Sun0630/daily/blob/master/daily/ExpandableTextViewDemo/gif/textview.gif?raw=true)
 
-* 智能搜索框
-![](/daily/SearchLayout/search.png)
+* [智能搜索框](https://github.com/Sun0630/daily/tree/master/daily/SearchLayout)
+
+![](https://github.com/Sun0630/daily/blob/master/daily/SearchLayout/search.png?raw=true)
 
 * 提示音加震动(SoundPool & Vibrator)
+
+* 手写一个RatingBar
+
+![Ratingbar](/daily/MyRatingBar/rating.gif)
