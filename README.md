@@ -26,6 +26,11 @@
 
 * 提示音加震动(SoundPool & Vibrator)
 
-* 手写一个RatingBar
+* 手写一个RatingBar[MyRatingBar]
 
 ![Ratingbar](/daily/MyRatingBar/rating.gif)
+
+
+* 自定义字母索引表[CityIndex]
+
+![City](/daily/CityIndex/index.gif)

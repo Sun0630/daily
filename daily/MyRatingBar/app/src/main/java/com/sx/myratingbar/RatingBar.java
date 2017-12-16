@@ -55,7 +55,7 @@ public class RatingBar extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //绘制高度，一张图片的高度    padding  间隔
         int height = starFocusBitmap.getHeight();
-        int width = starFocusBitmap.getWidth() * starCount + getPaddingRight();
+        int width = (starFocusBitmap.getWidth() + 10) * starCount;
         setMeasuredDimension(width, height);
     }
 
@@ -64,7 +64,7 @@ public class RatingBar extends View {
     protected void onDraw(Canvas canvas) {
         //绘制几个星星
         for (int i = 0; i < starCount; i++) {
-            int left = i * starNormalBitmap.getWidth();
+            int left = i * (starNormalBitmap.getWidth() + 10);
             if (currentStars > i) {
                 canvas.drawBitmap(starFocusBitmap, left, getPaddingTop(), null);
             } else {
@@ -94,7 +94,7 @@ public class RatingBar extends View {
                     currentStarCount = starCount;
                 }
 
-                if (currentStarCount == currentStars){
+                if (currentStarCount == currentStars) {
                     return true;
                 }
 
