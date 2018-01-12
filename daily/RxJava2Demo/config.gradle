@@ -1,0 +1,46 @@
+/**
+ * 在主项目的根目录下创建config.gradle文件
+ * 在这里单独处理统一依赖问题
+ * 注意需要在根目录的build.gradle中进行引入
+ */
+ext {
+    android = [
+            compileSdkVersion        : 26,
+            minSdkVersion            : 18,
+            targetSdkVersion         : 26,
+            versionCode              : 1,
+            versionName              : "1.0",
+            applicationId            : "com.sx.rxjava2demo",
+            testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
+    ]
+
+    /*Url 优化*/
+    url = [
+            "debug"  : "debugUrl1",
+//            "debug":"debugUrl2",
+//            "debug":"debugUrl3",
+//            "release":"releaseUrl1",
+            "release": "releaseUrl2"
+    ]
+
+
+    okhttpVersion = "3.4.1"
+    supportedSLibrary = "26.1.0"
+    rxjava = "2.1.0"
+    retrofit = "2.1.0"
+    rxandroid = "2.0.1"
+
+
+    dependencies = [
+            "appcompat"                : "com.android.support:appcompat-v7:${supportedSLibrary}",
+            "constraint-layout"        : "com.android.support.constraint:constraint-layout:1.0.2",
+            "rxjava"                   : "io.reactivex.rxjava2:rxjava:${rxjava}",
+            "rxandroid"                : "io.reactivex.rxjava2:rxandroid:${rxandroid}",
+            "retrofit"                 : "com.squareup.retrofit2:retrofit:${retrofit}",
+            "converter-gson"           : "com.squareup.retrofit2:converter-gson:${retrofit}",
+            "retrofit2-rxjava2-adapter": "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
+            "okhttp"                   : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            "logging-interceptor"      : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+    ]
+
+}

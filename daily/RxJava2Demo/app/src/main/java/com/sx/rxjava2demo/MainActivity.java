@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sx.rxjava2demo.entity.LoginRequest;
 import com.sx.rxjava2demo.entity.LoginResponse;
+import com.sx.rxjava2demo.entity.Translation;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -32,15 +34,25 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private Observable<Translation> mObservable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        requestTra();
+
+
+        intervalRequest();
+
+
         //- 基础
 //        Test1();
         //- 线程切换
@@ -54,9 +66,87 @@ public class MainActivity extends AppCompatActivity {
         //-zip 操作符
 //        test5();
         //-Flowable
-        test6();
+//        test6();
     }
 
+
+    /**
+     * 请求轮询
+     */
+    private void intervalRequest() {
+
+        Observable.interval(2, 1, TimeUnit.SECONDS)
+                .doOnNext(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "accept次数--->" + aLong);
+                        requestTra();
+                    }
+                }).subscribe(new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError:---> "+e.getMessage() );
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "onComplete:---> ");
+            }
+        });
+    }
+
+    private void requestTra() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://fy.iciba.com/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        GetRequest_Interface request = retrofit.create(GetRequest_Interface.class);
+
+        mObservable = request.getCall();
+
+        mObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Translation>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "onSubscribe: " + "开始");
+                    }
+
+                    @Override
+                    public void onNext(Translation translation) {
+                        translation.show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete");
+                    }
+                });
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     private void Test1() {
         Observable
@@ -331,14 +421,14 @@ public class MainActivity extends AppCompatActivity {
         Subscriber<Integer> downStream = new Subscriber<Integer>() {
             @Override
             public void onSubscribe(Subscription s) {
-                Log.e(TAG, "onSubscribe: " );
+                Log.e(TAG, "onSubscribe: ");
                 //响应式拉取。request是一种能力，下游处理事件的能力。
                 s.request(Long.MAX_VALUE);
             }
 
             @Override
             public void onNext(Integer integer) {
-                Log.e(TAG, "onNext: "+integer );
+                Log.e(TAG, "onNext: " + integer);
             }
 
             @Override
@@ -356,10 +446,4 @@ public class MainActivity extends AppCompatActivity {
         upStream.subscribe(downStream);
 
     }
-
-
-
-
-
-
 }
