@@ -20,6 +20,8 @@ public class TagLayout extends ViewGroup {
 
     private List<List<View>> mChildViews = new ArrayList<>();
 
+    private BaseAdapter mAdapter;
+
     public TagLayout(Context context) {
         super(context);
     }
@@ -32,7 +34,11 @@ public class TagLayout extends ViewGroup {
         super(context, attrs, defStyleAttr);
     }
 
-    // 2.1 onMeasure() 指定宽高
+    /**
+     * 2.1 onMeasure() 指定宽高
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -70,7 +76,7 @@ public class TagLayout extends ViewGroup {
             // 什么时候需要换行，一行不够的情况下 考虑 margin
             if (lineWidth + (childView.getMeasuredWidth() + params.rightMargin + params.leftMargin) > width) {
                 // 换行,累加高度  加上一行条目中最大的高度
-                height += childView.getMeasuredHeight() + params.bottomMargin + params.topMargin;
+                height += maxHeight;
                 lineWidth = childView.getMeasuredWidth() + params.rightMargin + params.leftMargin;
                 childViews = new ArrayList<>();
                 mChildViews.add(childViews);
@@ -114,7 +120,7 @@ public class TagLayout extends ViewGroup {
 
         for (List<View> childViews : mChildViews) {
             left = getPaddingLeft();
-
+            int maxHeight = 0;
             for (View childView : childViews) {
                 ViewGroup.MarginLayoutParams params = (MarginLayoutParams) childView.getLayoutParams();
                 left += params.leftMargin;
@@ -129,12 +135,39 @@ public class TagLayout extends ViewGroup {
                 childView.layout(left, childTop, right, bottom);
                 // left 叠加
                 left += childView.getMeasuredWidth() + params.rightMargin;
+                int childHeight = childView.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+                maxHeight = Math.max(maxHeight, childHeight);
             }
 
             // 不断的叠加top值
-            ViewGroup.MarginLayoutParams params = (MarginLayoutParams) childViews.get(0).getLayoutParams();
-            top += childViews.get(0).getMeasuredHeight() + params.topMargin + params.bottomMargin;
+            top += maxHeight;
         }
+    }
+
+
+    /**
+     * 设置Adapter
+     * @param adapter
+     */
+    public void setAdapter(BaseAdapter adapter) {
+        if (adapter == null) {
+            throw new NullPointerException("u can't do this !");
+        }
+
+        //清空
+        removeAllViews();
+
+        mAdapter = null;
+        mAdapter = adapter;
+
+        int childCount = mAdapter.getCount();
+
+        for (int i = 0; i < childCount; i++) {
+            View childView = mAdapter.getView(i, this);
+            addView(childView);
+        }
+
+
     }
 }
 

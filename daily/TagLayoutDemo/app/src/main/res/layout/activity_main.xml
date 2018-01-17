@@ -8,81 +8,10 @@
 
 
     <com.sx.taglayoutdemo.TagLayout
+        android:id="@+id/tag_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF0000">
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World Sunny!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AAAAA!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BB!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VVVVVVVVV!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VVVVVVVVV!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VVVVwerVVVVV!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="dsfewr!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VVVVVVVVV!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VVVVVdasfdsdfdsfVVVV!"
-            />
-
-        <TextView
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VVVVVVVVV!"
-            />
-
-    </com.sx.taglayoutdemo.TagLayout>
+        />
 
 
 </LinearLayout>

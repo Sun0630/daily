@@ -34,3 +34,7 @@
 * 自定义字母索引表[CityIndex]
 
 ![City](/daily/CityIndex/index.gif)
+
+* 自定义流式布局
+
+![City](/daily/TagLayoutDemo/taglayout.png)
