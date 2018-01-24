@@ -11,7 +11,14 @@
         android:id="@+id/tag_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         />
+
+    <com.sx.taglayoutdemo.TouchView
+        android:id="@+id/touch_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/colorAccent"/>
 
 
 </LinearLayout>

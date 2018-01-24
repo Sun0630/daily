@@ -1,7 +1,8 @@
 package com.sx.taglayoutdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,31 @@ public class MainActivity extends AppCompatActivity {
 
     private TagLayout mTagLayout;
     private ArrayList<String> mItems;
+    private TouchView mTouchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTagLayout = findViewById(R.id.tag_layout);
+
+        mTouchView = findViewById(R.id.touch_view);
+
+//        mTouchView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.e("TAG", "onTouch: " + event.getAction());
+//                return false;
+//            }
+//        });
+
+        mTouchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("TAG", "onClick: ");
+            }
+        });
+
 
         mItems = new ArrayList<>();
 
