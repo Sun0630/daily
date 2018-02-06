@@ -38,3 +38,12 @@
 * 自定义流式布局
 
 ![City](/daily/TagLayoutDemo/taglayout.png)
+
+
+* IPCDemo
+    * AIDL
+    * ContentProvider
+    * Socket
+    * Messenger
+    * Bundle
+    * 文件共享
