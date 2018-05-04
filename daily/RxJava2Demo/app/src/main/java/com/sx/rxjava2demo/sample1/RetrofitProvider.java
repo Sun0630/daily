@@ -1,4 +1,4 @@
-package com.sx.rxjava2demo;
+package com.sx.rxjava2demo.sample1;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 

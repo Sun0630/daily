@@ -1,5 +1,6 @@
 package com.sx.taglayoutdemo;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -69,5 +71,57 @@ public class MainActivity extends AppCompatActivity {
                 return tagView;
             }
         });
+
+
+        //执行异步任务
+        new DownAsyncTask().execute();
+
     }
+
+
+    /**
+     * 输入参数 URL
+     * 后台任务的进程参数  Integer
+     * 后台任务的返回结果  Long
+     */
+    private class DownAsyncTask extends AsyncTask<URL, Integer, Long> {
+
+        /**
+         * 主线程中执行，异步任务执行之前调用，做一些准备工作
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        /**
+         * 在线程池中执行，执行异步任务.通过publishProgress来更新任务执行进度
+         *
+         * @param urls
+         * @return 返回结果给#onPostExecute
+         */
+        @Override
+        protected Long doInBackground(URL... urls) {
+            return null;
+        }
+
+        /**
+         * 主线程中执行，当后台任务执行发生改变时调用
+         * @param values
+         */
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        /**
+         * 主线程中执行，异步任务执行之后调用
+         * @param aLong
+         */
+        @Override
+        protected void onPostExecute(Long aLong) {
+            super.onPostExecute(aLong);
+        }
+    }
+
 }

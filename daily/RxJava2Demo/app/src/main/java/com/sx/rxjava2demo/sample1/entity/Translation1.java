@@ -1,4 +1,6 @@
-package com.sx.rxjava2demo.entity;
+package com.sx.rxjava2demo.sample1.entity;
+
+import android.util.Log;
 
 /**
  * @Author Administrator
@@ -6,7 +8,7 @@ package com.sx.rxjava2demo.entity;
  * @Description
  */
 
-public class Translation {
+public class Translation1 {
 
     /**
      * status : 1
@@ -93,7 +95,8 @@ public class Translation {
 //        System.out.println("Rxjava翻译结果：" + content.from);
 //        System.out.println("Rxjava翻译结果：" + content.to);
 //        System.out.println("Rxjava翻译结果：" + content.vendor);
-        System.out.println("Rxjava翻译结果：" + content.out);
+//        System.out.println("Rxjava翻译结果：" + content.out);
+        Log.e("MainActivity", "show: "+content.out );
 //        System.out.println("Rxjava翻译结果：" + content.err_no);
     }
 }

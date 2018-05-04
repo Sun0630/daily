@@ -26,9 +26,9 @@ ext {
 
     okhttpVersion = "3.4.1"
     supportedSLibrary = "26.1.0"
-    rxjava = "2.1.0"
+    rxjava = "2.1.13"
     retrofit = "2.1.0"
-    rxandroid = "2.0.1"
+    rxandroid = "2.0.2"
 
 
     dependencies = [
