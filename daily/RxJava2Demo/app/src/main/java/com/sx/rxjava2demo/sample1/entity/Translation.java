@@ -99,4 +99,9 @@ public class Translation {
         Log.e("MainActivity", "show: "+content.out );
 //        System.out.println("Rxjava翻译结果：" + content.err_no);
     }
+
+    public String print(){
+        return content.out;
+    }
+
 }

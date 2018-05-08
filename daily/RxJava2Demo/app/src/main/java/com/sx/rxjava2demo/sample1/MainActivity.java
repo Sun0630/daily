@@ -3,10 +3,15 @@ package com.sx.rxjava2demo.sample1;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.sx.rxjava2demo.R;
 import com.sx.rxjava2demo.sample1.entity.Translation;
 import com.sx.rxjava2demo.sample1.entity.Translation1;
@@ -33,6 +38,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Function3;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -107,8 +113,272 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 实例5：模拟从磁盘/内存/网络获取数据。先从磁盘/内存中读取数据，如果磁盘和内存中都没有数据，那么再从网络上拉取数据。提交获取数据的效率。
          */
-        getDataFrom();
+//        getDataFrom();
 
+        /**
+         * 实例6：合并数据源，从不同的数据源获取的数据（本地 or 网络），通过Merger  or  zip 操作符合并之后统一展示在客户端
+         */
+//        mergerData();
+//        zipData();
+
+        /**
+         * 实例7：联合判断，填写表单数据的时候，只有当所有选项都填完才能提交
+         */
+//        initView();
+
+        /**
+         * 实例8：功能防抖 用户在规定时间内多次触发该功能，只会响应第一次触发操作
+         */
+//        justOnd();
+
+        /**
+         * 实例9：联想搜索优化
+         */
+//        search();
+
+
+        testCombinelatest();
+
+
+        Flowable
+                .create(new FlowableOnSubscribe<String>() {
+                    @Override
+                    public void subscribe(FlowableEmitter<String> emitter) throws Exception {
+
+                        emitter.requested();
+                    }
+                },BackpressureStrategy.BUFFER)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(1000);
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
+    private void testCombinelatest() {
+        Observable
+                .combineLatest(Observable.just(1L, 2L, 3L),
+                        Observable.intervalRange(0, 3, 1, 1, TimeUnit.SECONDS),
+                        new BiFunction<Long, Long, Long>() {
+                            @Override
+                            public Long apply(Long aLong, Long aLong2) throws Exception {
+                                Log.e(TAG, "合并的数据：" + aLong + "--" + aLong2);
+                                return aLong + aLong2;
+                            }
+                        })
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "最后的合并结果：" + aLong);
+                    }
+                });
+    }
+
+    private void search() {
+        EditText editText = findViewById(R.id.ed);
+        final TextView textView = findViewById(R.id.tv);
+
+
+        RxTextView
+                .textChanges(editText)
+                .debounce(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CharSequence>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(CharSequence sequence) {
+                        textView.setText("发送给服务器的数据：" + sequence);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete: ");
+                    }
+                });
+
+    }
+
+    private void justOnd() {
+        btn = findViewById(R.id.list);
+        btn.setEnabled(true);
+
+        RxView
+                .clicks(btn)
+                // 规定2S内点击，只响应第一次点击事件
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        Log.e(TAG, "发送了网络请求");
+                    }
+                });
+    }
+
+    EditText name, age, job;
+    Button btn;
+
+    private void initView() {
+        name = findViewById(R.id.name);
+        age = findViewById(R.id.age);
+        job = findViewById(R.id.job);
+        btn = findViewById(R.id.list);
+
+
+        /**
+         * 使用RxBinding
+         */
+        Observable<CharSequence> nameObservable = RxTextView
+                //对控件数据变更进行监听，传入EditText控件，点击EditText进行编辑的时候，都会发送一个数据事件Function3
+                .textChanges(name)
+                //跳过一开始无任何输入值的时候的空值
+                .skip(1);
+
+        Observable<CharSequence> ageObservable = RxTextView
+                .textChanges(age)
+                .skip(1);
+
+        Observable<CharSequence> jobObservable = RxTextView
+                .textChanges(job)
+                .skip(1);
+
+
+        /**
+         * 通过 combineLastest() 进行合并事件和联合判断
+         */
+
+        Observable
+                .combineLatest(nameObservable, ageObservable, jobObservable, new Function3<CharSequence, CharSequence, CharSequence, Boolean>() {
+                    @Override
+                    public Boolean apply(CharSequence sequence, CharSequence sequence2, CharSequence sequence3) throws Exception {
+                        //判断表单信息是否为空
+                        boolean isNameVaild = !TextUtils.isEmpty(name.getText());
+
+                        boolean isAgeVaild = !TextUtils.isEmpty(age.getText());
+
+                        boolean isJobVaild = !TextUtils.isEmpty(job.getText());
+
+                        return isNameVaild && isAgeVaild && isJobVaild;
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        Log.e(TAG, "accept: 提交按钮是否可点击 -> " + aBoolean);
+                        btn.setEnabled(aBoolean);
+
+                    }
+                });
+
+
+    }
+
+    private void zipData() {
+        //1.创建Retrofit实例
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(mUrl)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        // 创建网络请求接口
+        GetRequest_Interface request = retrofit.create(GetRequest_Interface.class);
+
+
+        Observable<Translation> observable1 = request.getCall().subscribeOn(Schedulers.io());
+        Observable<Translation1> observable2 = request.getCall2().subscribeOn(Schedulers.io());
+
+        // 合并两个数据源
+        Observable
+                .zip(observable1, observable2, new BiFunction<Translation, Translation1, String>() {
+                    @Override
+                    public String apply(Translation translation, Translation1 translation1) throws Exception {
+                        return translation.print() + " & " + translation1.print();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Log.e(TAG, "accept: 最终结果 -->" + s);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e(TAG, "出错了！");
+                    }
+                });
+    }
+
+
+    /**
+     * 展示最终的数据结果
+     */
+    private String result = "";
+
+    private void mergerData() {
+        //1.模拟从网络获取数据
+        Observable<String> netObservable = Observable
+                .just("网络数据")
+                .subscribeOn(Schedulers.io());
+
+        //2.模拟从本地获取数据
+        Observable<String> localObservable = Observable
+                .just("本地数据")
+                .subscribeOn(Schedulers.io());
+
+        //3.合并两个数据源
+        Observable
+                .merge(netObservable, localObservable)
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Log.e(TAG, "数据源  - >" + s);
+                        result += s + " ";
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "数据合并完成");
+                        Log.e(TAG, "最终数据  - >" + result);
+                    }
+                });
     }
 
     /**
@@ -546,11 +816,6 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(consumer);
 
-    }
-
-
-    public void login(View view) {
-//        request();
     }
 
 
